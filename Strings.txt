@@ -1,0 +1,89 @@
+/*
+TL: DR
+-strings come from the standard library
+-we can concatenate strings
+-we can get the length of a string using the length or size methods
+-we can use [] to get a character at a specific index, but we probably shouldn't... at() is better
+*/
+
+
+
+
+#include <iostream>
+#include <string>
+
+int main() {
+  std::string s = "Alex ";
+  s += "Thornton";
+
+  std ::string s2 = "Alex Thornton";
+
+  if (s == s2) {
+    std::cout << "Yep" << std::endl;
+  }
+
+  else {
+    std::cout << "Nope" << std::endl;
+  }
+
+  std::cout << s.length() << std::endl;
+  std::cout << s.size() << std::endl;
+  std::cout << s[1] << std::endl<< std::endl;
+
+  //std::cout << s.at(-1) << std::endl;
+  //at() will check if the index given is legit; otherwise, it throws an exception
+  
+  for (int i = 0; i < s.length(); i++) {
+    std::cout << s[i] << std::endl;
+  }
+  return 0;  
+}
+
+/*
+Python
+a = "Hi"
+a += " Kevin"
+
+a referenced an object "Hi"
+now a references a new object "Hi Kevin" 
+
+Java
+
+String s = "Alex";
+String s2 = s + " Thornton";
+String s3 = "Alex Thornton";
+
+if (s2 == s3) {
+  System.out.println("Yep!");
+}
+
+else {
+  System.out.println("Nope!");
+}
+
+s, s2, s3 are references
+
+== in Java checks to see if the objects are the same (identity, not equality)
+
+s2.equals(s3) would check equality
+
+even though s2 and s3 have the same value ("Alex Thornton"), they are not the same object... 
+
+C++
+strings ARE MUTABLE
+s = "Kevin";
+s += " Huang";
+
+By concatenating to the original string, we change the original object.
+
+*/
+
+/*
+because C++ prioritizes performance...
+  stuff like bound-checking is sacrificed
+  we can use that stuff, but we sacrfice performance (opt-in)
+
+[] - triggers undefined behavior in illegitimate cases (e.g, -1)
+
+char* - C-style arrays are error-prone and are going to be ignored as much as possible...
+*/
