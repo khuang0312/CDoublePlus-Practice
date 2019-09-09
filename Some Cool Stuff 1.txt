@@ -1,0 +1,59 @@
+
+#include <iostream>
+using namespace std; //allows you to simply use unqualified names
+
+
+int main() {
+  std::cout << "Qualified" << std::endl;
+  cout << "Unqualified" << endl;
+
+  //different ways of initializing variables...
+  int x = 0;
+  int y(0);
+  int z {0}; 
+
+  //type deduction
+  int a = 0;
+  auto b = a; //b's type is automatically set to a's
+
+  decltype(b) c; //c's type is automatically set to b's
+
+  //meant to be used either when the type cannot be obtained by other means or when using it improves code readability
+
+  /*
+  75         // decimal
+  0113       // octal
+  0x4b       // hexadecimal 
+
+  75         // int
+  75u        // unsigned int
+  75l        // long
+  75ul       // unsigned long 
+  75lu       // unsigned long 
+  
+  3.14159    // 3.14159
+  6.02e23    // 6.02 x 10^23
+  1.6e-19    // 1.6 x 10^-19
+  3.0        // 3.0  
+
+  3.14159L   // long double
+  6.02e23f   // float  
+
+  true
+  false
+
+  & AND Bitwise AND
+  | OR Bitwise inclusive OR
+  ^ XOR Bitwise exclusive OR
+  ~ NOT Unary complement (bit inversion)
+  << SHL Shift bits left
+  >> SHR Shift bits right
+
+  */
+  int i;
+  float f = 3.14;
+  i = (int) f; //typecasts f's value to an integer that will be stored in i
+
+  int n = sizeof (i); //gives size of type or object in bytes
+  cout << n;
+}
