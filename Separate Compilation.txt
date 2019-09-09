@@ -1,0 +1,52 @@
+/*
+.cpp - source files
+static type checking - upon compilation, all types are checked
+
+declaration - saying something exists
+definition - saying what it is or does
+
+compilation
+-one source file at a time
+-forgets everything about other source files at beginning
+-type checks, then compiles into an object file, some thing may be left as placeholders--things defined in other source files
+
+linking
+-stitching all object files and reuired libraries together into the executable
+-resolves placeholders
+
+1. Nothing can be used without its declaration appearing first
+2. Some kinds of declarations can't be repeated (Just avoid this)
+3. Nothing can be defined more than once. (One Definition Rule) 
+
+Link-time error - the result of trying to figure out whether to use the definition given in source file A or the one in source file B 
+
+
+source files - contains definitions necessary to implement module--each module has only one source file 
+
+header files (.hpp) - contains declarations of entities intended to be visible to other modules, does not contain definitions; 
+
+Reasons for convention...
+clearly distinguishes header and source files
+"pp", a filesystem-compatible way of saying "++", indicates C++, not C 
+
+if there are helper functions not intended to be "public", no declarations in header file
+
+consequently, each module has either one or no header files--assuming that the module doesn't have anything publicly available to other modules
+
+
+TLDR:
+Header files...
+contain declarations, allowing one source file to use entities in another...
+"included" in source files when need, making declarations available
+posses no definitions to avoid multiple copies of definitions (a source of link-time errors)
+should only be included once to avoid repeating declarations(multiple inclusion prevention pattern)
+
+"separation of concerns" - separate parts should handle separate issues
+
+-functions should be short, do a single job
+-functions strongly related to another should be in the same source file (high cohesion)
+-functions should not depend so much on how other functions are implemented (low coupling)
+-header files allow functions in one source file to be seen by another
+-only functions needed to be called from other source files should be declared in the header file
+
+*/
