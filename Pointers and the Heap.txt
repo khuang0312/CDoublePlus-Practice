@@ -1,0 +1,146 @@
+/*
+advantage of static allocation
+automatic deallocation when object is out of scope
+
+not all things can be statically allocated
+if size cannot be determined at compile time, it can't be statically allocated and put on the run-time stack
+if an object needs to outlive a function and ends up being constantly copied or modified, the size also can't be determined...
+*/
+
+/*
+static - before program runs (what compiler does)
+dynamic - happens while program runs
+
+static allocation - compiler determines object size and relative position in memory
+dynamic allocation - creates objects on fly and destroys them at some other time
+
+Python/Java - dynamic allocation is automatic; done by a garbage collector
+C++ - dynamic allocation is done manually
+new - allocates
+delete - deallocates
+*/
+
+/*
+run-time stack is a bad place because constantly allocating and deallocating--pushing and popping from the stack--messes with the ordered nature of the stack...
+
+free store (heap) - 
+Your program decides when memory will be allocated, how much of it will be allocated, and what types of objects will be stored there.
+
+Your program decides when memory will be deallocated, making that memory available to be reused elsewhere. The memory is not available to any other part of the program until that deallocation has been done.
+
+Note: "heap" is also used in data structures--it means something else there
+*/
+
+/*
+std::string
+
+fixed-size of string; can be allocated at compile time.
+character sequence that can grow and shrink over the lifetime of a string, it will need to be dynamically allocated.
+
+if something can be modified over the course of its life, it must be dynamically allocated...
+this means that you cannot use a reference to access it; thus, you use a pointer...
+
+pointer
+memory address
+type
+
+star after type indicates the declaration of a variable storing a pointer to a particular type of object 
+
+references store memory addresses implicitly
+variable is same as object referred to...
+
+pointers are memory adresses explicitly and implicitly...
+pointers can't store objects, but they can store references...
+
+& - address-of operator
+
+int i = 3;
+int* x; //x is a pointer to an integer
+x = &i; //x is a pointer to the object stored in i...
+
+int i = 3;
+int* p = &i; //p is a pointer to the object stored in i...
+int* q = p; //q is p
+
+int i = 3;
+int* p = &i; //p is now a pointer to the object stored in i
+int** q = &p; //q is a pointer to the pointer stored in p 
+*/
+
+
+/*
+dereferencing - accessing an object that a pointer points to
+
+int* p:
+p is the pointer itself (memory address of object)
+*p is the object that the pointer points to 
+
+
+References are implicit synonyms for objects
+Pointers explicitly store the location of another object.
+
+No pointers to references
+*/
+
+/*
+null pointer (nullptr)
+
+pointer that points to no object
+don't dereference it 
+
+int* q = nullptr; //USE THIS ONE
+int* q = 0;
+int* q = NULL;
+*/
+
+/*
+#include <iostream>
+
+int main() {
+int i = 3;
+int* p = &i;
+
+std::cout << "i=" << i << std::endl; //value of i
+std::cout << &i << std::endl; //memory address of i
+
+std::cout << "p*=" << *p << std::endl; //dereferenced pointer (value at memory address of i)
+std::cout << p << std::endl; //pointer (memory address of i)
+
+int* q = 0;
+//std::cout << *q; this will create a segmentation fault
+std::cout << &q; //so memory is indeed allocated...
+
+
+return 0;
+}
+*/
+
+/*
+pointers are primarily used to access dynamically allocated objects (in heap)
+
+new (type) -> new int
+Find a block of memory on the heap, one big enough to store an int.
+Provided that a block of memory was found, it is allocated such that it can't be allocated anywhere else until explicitly deallocated.
+Gives an pointer (int*).
+
+new operator allocates an object on the heap and returns a pointer to it.
+The delete operator takes that same pointer and deallocates the object that it points to.
+
+delete p as meaning "Delete the object that the pointer p points to
+you don't want to dereference a pointer if the object that the pointer leads you to is deleted...
+
+ Every time you create an object with new, think about what part of your program should be responsible for deleting it. If the answer is "the same function in which it was created," what you probably want is a statically-allocated local variable instead, unless the object is particularly large or has an indeterminate size...
+*/
+#include <iostream>
+
+int main() {
+  int* p = new int; 
+  *p = 3;
+  std::cout << p << std::endl;
+  std::cout << *p << std::endl;
+  (*p)++;
+  std::cout << *p << std::endl;
+  delete p;
+
+  return 0;
+}
