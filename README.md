@@ -7,9 +7,7 @@ Notes in order
 3. Standard Input and Output
 4. Separate Compilation
 5. Behind the Scenes
-=========================
 WIP
-=========================
 6. More About Functions 
 7. Pointers and the Heap 
 8. Single Dimension Arrays 
