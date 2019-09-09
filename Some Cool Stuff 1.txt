@@ -1,3 +1,5 @@
+unqualified names, different intializations, type deduction, bitshift operations, and typecasting
+
 
 #include <iostream>
 using namespace std; //allows you to simply use unqualified names
