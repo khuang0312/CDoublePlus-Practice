@@ -1,0 +1,52 @@
+/*
+std::cin - standard input (receives bytes)
+std::cout - standard output (writes bytes)
+std::endl - standard end of line sequence that can be put into std::cout
+
+redirection - connecting standard input or output to other places
+
+piping - using standard output of one program as the standard input of another program, connecting programs...
+*/
+
+/*
+std::cin is by default connected to a text-based input device
+
+1. Type a line and press Enter. Input and \n is stored in a input buffer.
+2. If enough text satisfies request, operation complete. Otherwise, type another line.
+3. Input buffer has a cursor that tracks the next character you haven't typed...
+
+>> - get operator, allows you to get a single object from std::cin
+
+generally skips inital whitespace, then greedily consumes until it hits a character that doesn't match what it wants
+
+if object isn't fully built and there's no more characters, you need to make another line
+
+int - initial whitespace skipped, optional minus sign, nums
+double - initial whitespace skipped, optional minus signs, nums, optional dot, nums
+std::string - initial whitespace skipped, word
+*/
+
+#include <iostream>
+
+int main() {
+  int num;
+  double decimal;
+  std::string s;
+
+  std::cin >> num >> s >> decimal;
+  
+  //there's still a newline in the input buffer!
+  
+  return 0;
+}
+
+/*
+std::getline(input stream, variable)
+consumes all text until it reaches a newline, storing all text in variable
+if input buffer is completely empty, user needs to input and press Enter
+may store empty string if there is nothing but a newline
+newline at the end of each line of input is whitespace, so you might find a whitespace in the input buffer
+
+std::cin.ignore(1)
+ignores 1 character in input buffer (moves cursor one forward1=)
+*/
