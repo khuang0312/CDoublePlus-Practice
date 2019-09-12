@@ -1,0 +1,59 @@
+/*
+const - indicates that something remains constant
+
+any possibility of the value changing -> error
+
+const int x = 3;
+const int y = x;
+int z = x;
+const int w = z;
+int& r = x; //illegal; by creating a reference r, you allow the possibility of changing x by assigning into r
+int* p = &x; //illegal; by creating a pointer p that uses the address x, you allow the possibility of changing x, by assigning into x
+
+Avoid pass-by-value parameter passing--objects might be potentially expensive to copy (e.g., std::strings that might be quite long).
+
+Function can't modify the value of the arguments we pass to it, even if we have no copy of them.
+*/
+
+int main() {
+  const int a = 2;
+  //a = 3; causes an error
+
+  int b = a;
+  b = 3; //does not cause an error since b is a "copy" of a
+
+  int x = 3;
+  const int& y = x;
+  //a reference to an constant gurantees that the reference itself can't change the value
+
+  const int c = 3;
+  const int& d = c;
+  //legal to refer d to c
+  //c is guaranteed not to change
+  //d is guaranteed not to change c
+
+  return 0;
+}
+
+/* 
+with pointers, this is slightly more difficult...
+p - address
+*p -object
+
+
+Nothing; either p or *p can change. (default)
+Hold the pointer p constant (can't point it somewhere else), but allow *p to change.
+Hold *p constant (can't change the value), but allow p to be pointed somewhere else.
+Hold both the pointer p and the value *p to be constant 
+
+int* p;
+const int* q;
+int* const r;
+const int* const s;
+
+p is a pointer to an int.
+q is a pointer to an int constant. The value that q points to cannot be changed via q (e.g., attempting to assign to *q will be an error), but q can be pointed somewhere else.
+r is a constant pointer to an int. It will be possible to modify the value r points to, but r cannot be pointed anywhere else.
+s is a constant pointer to an int constant. It will be illegal to change both s and *s.
+
+*/
