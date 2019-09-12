@@ -1,0 +1,110 @@
+#include <iostream>
+using std::string;
+using std::cout;
+
+struct Student {
+  string name;
+  int age;
+  double gpa;
+};
+
+void f() {
+  Student s1; //static allocation of Student struct
+  s1.name = "Jim";
+  s1.age = 19;
+  s1.gpa = 4.0;
+
+  //uniform initialization syntax
+  Student s2{"Tim", 20, 2.8};
+  //initialization list -- mind the order!
+
+  //C++ 20 designated initializers -> Student s2{.name = "Jim", .age = 19, .gpa = 4.0}  
+}
+
+void g() {
+  Student* s1 = new Student;
+  //accessing struct members through pointers is complicated...
+  
+  //s1.name = "Alex";     // Illegal, because d is a pointer; it has no member called year
+  //*s1.name = "Alex";    // Also illegal, because "." has a higher precedence than "*"
+  //s1.name = "Alex";  // Legal, but ugly as sin!
+
+  s1->name = "Alex";
+  s1->age = 82;
+  s1->gpa = 3.6;
+
+  Student* s2 = new Student{"Dan", 20, 3.1};
+
+  delete 
+
+}
+
+int main() {
+  f();
+
+  g();
+
+  return 0;
+}
+
+/*
+Static allocation of structs 
+Unlike Java (primitives vs objects), C++ doesn't distinguish between types we create and built-in types
+
+when structs fall out of scope, they are destroyed automatically, taking its members with it
+if members are pointers, pointers will be destroyed, but not their objects...
+*/
+
+/*
+Dynamic allocation of structs
+
+when structs fall out of scope, they are destroyed automatically, taking its members with it
+if members are pointers, pointers will be destroyed, but not their objects...
+
+delete objects if desired before destroying struct
+*/
+
+/*
+A struct can be passed to a function in the same ways that an int can: by value (meaning that a copy of the struct is passed), by reference (meaning that a reference to the struct is passed, so changes to the struct inside the function take effect in the caller)
+
+void foo(Date d)
+{
+    // d is a copy of the struct passed as a parameter
+}
+
+void bar(Date& d)
+{
+    // modifications to d take effect in the caller
+}
+
+var baz(const Date& d)
+{
+    // d is not a copy, but it can't be modified
+}
+*/
+
+/*
+struct declaration
+
+C++ compiler makes layout for its members
+
+How much memory will be used to store one instance of the struct?
+Where, within that amount of memory, will each of the struct's members be stored?
+
+struct's members will be laid out in memory one after another, in the order declared
+min size is sum of sizes of its members
+
+std::cout << sizeof(Date) << std::endl;
+
+On many processor architectures, memory accesses are significantly faster if they are done on appropriate boundaries. While the rules below are hypothetical, they're not entirely uncommon in reality.
+Accessing any single byte is generally about as fast as accessing any other one.
+Accessing two bytes is best done on a two-byte boundary (i.e., a memory address that is a multiple of 2).
+Accessing four bytes is best done on a four-byte boundary (i.e., a memory address that is a multiple of 4).
+Accessing eight bytes is best done on a eight-byte boundary (i.e., a memory address that is a multiple of 8).
+
+C++ compilers quite often introduce padding into a structure, bytes that are intentionally left unused, but that serve to improve access speeds to the individual members by placing them at the appropriate boundaries
+
+You can choose to disable this if you're more interested in saving memory or aligning things in particular places
+
+no standard for padding structures
+*/
