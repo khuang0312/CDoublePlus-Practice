@@ -1,0 +1,121 @@
+/*
+arrays
+sequence of cells living contiguously in memory
+fixed-size (a array of length 5 will forever remain length 5)
+homogenous (each element is the same type)
+no standard method to access size
+
+can be either statically or dynamically allocated
+
+
+*/
+
+/*
+Pros of Static Allocation
+Automatic deallocation when it falls out of scope
+Usually in cache most of the time, as the current stack frame is accessed often
+
+Cons...
+Run-time stack could be not big enough to accomodate stack frame (what's being pushed to the run-time stack)
+Must be given a size when created
+Fixed lifetime
+
+#include <iostream>
+using namespace std;
+
+void array_experiment() {
+  int firstArray[10]; //statically allocating an array
+  //since int is 4 bytes, the array is 40 bytes; think of this as having 10 int variables
+
+  for (int i = 0; i < 10; i++) {
+    firstArray[i] = i;
+  }
+
+  for (int i = 0; i < 10; i++) {
+    cout << firstArray[i] << endl; //access cell...
+  }
+
+  cout << firstArray[11] << endl; //illegal access
+  cout << firstArray[-1] << endl; //illegal access
+
+  //once function ends, array will cease to exist
+}
+
+int main() {
+  array_experiment();
+  return 0;
+}
+*/
+
+/*
+dynamic allocation of arrays
+
+void zeroFill(int* a, unsigned int size) {
+  for (unsigned int i = 0; i < size; ++i) {
+    a[i] = 0;
+  }
+}
+
+int main() {
+  int* a = new int[10]; //dynamically allocates enough memory, then returns pointer to first cell
+  //address of cell i = (address of cell 0) + (sizeof(int) * i)
+  //ex: address of cell 2 = 0000 + (4 * 2) = 0008!
+
+  a[0] = 1; //specific cell access is still the same
+
+  delete[] a; //deallocates array and all objects inside... only "dangling pointer" remains
+
+  int* b = new int[10];
+
+  //the simplest way to use arrays as parameters is the pointer to the first cell
+  zeroFill(b, 50); //this will definitely end badly... because the function doesn't check size
+  //the extra zeroes will end up writing to other memory that we might be using
+}
+*/
+
+/*
+pointer arithmetic
+
+addition, subtraction,
+integers only (pointers themselves are integers)
+
+a + 1 (pointer + 1 object)
+0000 -> 0004; assuming an integer is 4 bytes!
+
+int a[10];                           // a is effectively a pointer to the first element of the array
+int b[10];                           // b is also effectively a pointer
+std::cout << a << std::endl;         // writes the address of a[0]
+std::cout << (a + 1) << std::endl;   // writes the address of a[1]
+*(a + 1) = 3;                        // stores 3 in a[1]
+std::cout << (a - 1) << std::endl;   // writes the address of a[-1]
+std::cout << (a - b) << std::endl;   // writes the distance in memory between a[0] and b[0] (divided by the size of an int)
+
+void zeroFill(int* a, int size) {
+  int* end = a + size;
+  
+  for (int* p = a; p != end; ++p) {
+    *p = 0;
+  }
+}
+
+while potentially faster than just using indexing, more sophisticated compilers might use a pointer arithmetic form of this code...
+Clang translates this into memset...
+
+write clear code, then optimize 
+
+*/
+#include <iostream>
+int main() {
+  int a[10];
+  int b[10];
+
+  std::cout << a << std::endl;
+  std::cout << a + 1 << std::endl;
+  std::cout << (a + 2) - a << std::endl;
+
+  std::cout << b << std::endl;
+  std::cout << a-b << std::endl;
+  std::cout << a+12 << std::endl; 
+
+  std::cout << b-a << std::endl;
+}
