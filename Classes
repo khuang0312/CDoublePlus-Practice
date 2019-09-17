@@ -1,0 +1,48 @@
+/*
+unlike Java, built-in and user-defined types are all the same type of object in C++
+
+types
+-specify certain amount of memory required for its objects
+-specify layout (simple or "padded") for that memory
+-some support operators, allowing manipulation of their objects
+-some support methods, allowing objects to do something for us
+-specify initialization process (std::string is empty by default) when constructed
+-specify how resources held are released when destroyed
+-specify how it can be copied or moved (assignment or passed as a paremeter)
+-specify whether it can be copied or moved
+-specify what can and cannot be done on their const objects
+
+*/
+
+/*
+interface - specifies what objects can store and do
+implementation -specifies what happens when objects do things
+
+when code only uses objects, you only need interface
+classes are often declared in header files
+
+implementation is written in its own seperate source file
+
+
+members
+-member variables (as seen in structs)
+-member functions (methods)
+
+public 
+members are intended to be used outside class declared in
+
+private
+only accessible to code within class
+
+make implementation details private whenever possible — or leave them out of the interface altogether, using local variables (or other constructs we've yet to see, such as the unnamed namespace) instead
+
+
+class declarations specify existence of class and how its objects are used
+in class declarations, all class members are specified
+
+
+header - contains declarations
+source - contains definitions
+
+this is more relaxed with classes, but for now, stick with the above...
+*/
