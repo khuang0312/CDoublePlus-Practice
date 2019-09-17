@@ -1,0 +1,81 @@
+/*
+messing with the heap when you're not supposed to won't necessarily cause obvious errors because the other parts of the heap might be unallocated
+
+messing with the run-time stack when you're not supposed will create problems because you end up going into parts of the run-time stack already allocated to other values
+
+segmentation fault - accessing prohibited memory
+one of the causes: dereferencing a null pointer
+*/
+
+#include <iostream>
+using namespace std;
+
+
+int main() {
+  int* a = nullptr;
+  cout << *a; //dereferencing a null pointer!
+}
+
+/*
+valgrind memcheck
+
+http://valgrind.org/docs/manual/mc-manual.html
+
+catches the following:
+decisions made on unassigned values
+using memory that's never allocated
+using memory outside allocated memory
+attempting to deallocate twice or memory that was never allocated
+
+memory leak - memory dynamically allocated but never deallocated
+
+
+./run --memcheck app
+
+consider only first error message--other errors might resolve
+
+clean bill of health
+preamble
+no memory-related errors
+0 "definitely lost," "indirectly lost," "possibly lost," or "still reachable"
+*/
+
+
+/*
+lldb debugger
+
+https://www.nesono.com/sites/default/files/lldb%20cheat%20sheet.pdf
+
+./debug app
+./debug exp
+./debug gtest
+
+SIGSEGV - "segmentation fault
+nullptr - 0x0
+
+once you see the lldb prompt...
+
+
+
+run - runs program
+frame variable - see values of all local variables and parameters in a stack frame
+thread backtrace, bt - see all frames on run-time stack
+frame select 1 - selects frame 1
+print a - prints value of a
+quit - ends session
+
+breakpoint set --name hypotenuseLength //sets breakpoint on function hypotenuseLength
+b hypotenuseLength //same thing
+breakpoint set --file main.cpp --line 7 //sets breakpoint on line 7
+b main.cpp:7 //same thing
+breakpoint list //lists all breakpoints
+breakpoint delete 1 //deletes breakpoint 1
+
+thread step-over, next (if there's a function call, execute entire function)
+thread step-in, step (if there's a function call, stop at first line inside)
+thread step-out, finish (get out of current function to where it's called)
+
+continue (until end of program or another breakpoint)
+
+
+*/
