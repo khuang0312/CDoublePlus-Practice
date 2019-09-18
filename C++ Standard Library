@@ -1,0 +1,36 @@
+/*
+containers
+
+std::vector, an array-based sequence, in the same spirit as the ArrayList class we wrote in a previous example
+std::list, a doubly-linked list with head and tail pointers
+std::map, a balanced binary search tree of key/value pairs
+
+these containers are 
+type-generic
+class templates
+well-behaved
+
+std::vector stores a sequence of objects
+
+A vector must have been created with a particular number of cells.
+A vector use array cells, so each element has an index.
+Accessing an element is O(1)
+Inserting elements at beginning of the sequence, removing elements from the middle of the sequence, and so on, are O(N)
+
+
+*/
+#include <vector>
+#include <iostream>
+
+int main() {
+  std::vector<int> v;
+
+  for (int i = 0; i < 10; i++) {
+    v.push_back(i);
+  }
+ 
+
+  printf(v);
+
+  return 0;
+}
