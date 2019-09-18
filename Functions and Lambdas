@@ -1,0 +1,100 @@
+/*
+objects are function objects if they can be called like a function
+
+by writing the name of a function without the parentheses, you use it as a pointer
+
+if functions are objects, we should be able to...
+Store them in variables
+Pass them as arguments to other functions
+Return them as the result of other functions
+Store them in member variables of a class and initialize them in a constructor
+
+std::function is a template type
+when different parameters are passed, the resultant types differ...
+
+
+lambdas
+any programming language that considers functions data is considered to support functional programming
+
+[](){}
+
+[] - function literal; indicates that following is lambda expression;
+also specifies how variables in lambda's surrounding scope should be treated
+[=] make a copy of any outside variables used in the function
+[&] outside variables used in function should be treated as references
+() - lists parameters
+{} function body
+
+return type does not need to be specified; C++ uses function body, sometimes special syntax 
+
+act of copying can be expensive
+accessing things inside surrounding scope can be disastrous
+
+
+class Person {
+public:
+    ...
+    void setFirstName(const std::string& newFirstName);
+    ...
+};
+
+std::function<void(Person*, const std::string&)>
+
+
+
+class Person {
+public:
+    ...
+    std::string getFirstName() const;
+    ...
+};
+
+
+std::function<std::string(const Person*)>
+
+*/
+
+
+
+#include <iostream>
+#include <functional>
+
+int square(int n) {
+  return n * n;
+}
+
+void transform(int* a, unsigned int size, std::function<int(int)> f) {
+  for (unsigned int i = 0; i < size; i++) {
+    a[i] = f(a[i]);
+    }
+}
+
+void printArrayOfTen(int* a) {
+  std::cout << std::endl;
+  for (unsigned int i = 0; i < 10; i++) {
+    std::cout << a[i] << std::endl;
+    }
+}
+
+int main() {
+  std::function<int(int)> f = square;
+  std::cout << f(3) << std::endl ;
+
+  int a[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }; //I guess if you want to create an array straight up
+  transform(a, 10, square);
+  
+  printArrayOfTen(a);
+  
+  int b[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+  int x = 3;
+  transform(b, 10, [=](int i){return i + x;});
+  printArrayOfTen(b);
+
+  int c[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+  transform(b, 10, [&](int i){return i + x;});
+  printArrayOfTen(c);
+
+  return 0;
+}
+
