@@ -1,5 +1,6 @@
 # CDoublePlus-Practice
 This repository is going to be filled with code and notes that I wrote while studying C++.
+These notes are based off my professor's and are made, so I can reference them.
 
 Notes in order
 1. C++ Basics
@@ -26,3 +27,4 @@ Notes in order
 22. Contracts and Exceptions
 23. RAII
 24. Templates
+
