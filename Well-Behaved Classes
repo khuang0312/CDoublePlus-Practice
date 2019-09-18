@@ -1,0 +1,43 @@
+/*
+well-behaved classes
+statically-allocated portion of them facilitates storage on run-time stack, and dynamically allocates and deallocates memory if handling large amounts
+automatically clean themselves when they die 
+can be passed to functions by value and preserve the usual semantics (disallowed if not sensible)
+can be assigned into existing objects of the same type (disallowed if not sensible)
+can be const  (disallowed if not sensible)
+efficient
+
+
+ArrayLists
+It handles all of the necessary dynamic array allocation and deallocation. At any given time, an ArrayList contains one dynamically-allocated array.
+
+It keeps track of the capacity of the underlying array, as well as tracking how many elements are currently being stored in the list (which we'll call the ArrayList's size). If there are n elements stored in the list, they will always occupy the first n cells of the underlying array, but the underlying array may have additional empty space available.
+
+As elements are added and the underlying array fills, the ArrayList allocates a new array and copies existing elements into it, so there is no theoretical limit on the number of elements that can be stored (though there is obviously a practical limit, since machines only have so much memory).
+
+-----------------------------------------------------------------------------------------
+Allocate ArrayLists statically or dynamically.
+
+Add elements to ArrayLists without worrying about running out of space (because of the array reallocations that are done internally when the arrays fill).
+
+Pass ArrayLists by value or by reference, while preserving the appropriate semantics.
+
+Declare const ArrayLists, whose elements we can read but not write.
+------------------------------------------------------------------------------------------
+
+Big 3
+
+classes should have:
+destructor - performs cleanup
+copy constructor -  initialize new objects that are created as copies of existing ones
+assignment operator - existing object is assigned into another existing object
+
+need to write one of them usually implies the need to write all three of them
+defaults are generated if you don't write them
+
+By default, destroying an object destroys its member variables. Constructors initialize member variables in the order they're listed in the class declaration, just before the body of the constructor is executed. Destructors destroy them in the opposite order, just after the body of the destructor is executed. A default destructor has an empty body, meaning that the only thing destroyed are the member variables. But if those member variables are all well-behaved, they clean up any necessary resources automatically when they die, so there's nothing else the destructor needs to do.
+
+By default, creating a copy of an object copies its member variables, one by one, into the new object. If those member variables are all well-behaved, they support the appropriate copying semantics already, so nothing special needs to be done.
+
+By default, assigning an object assigns its member variables one by one from the source object into the target object, in place of the original member variables in the target object. If those member variables are well-behaved, they support assignment already.
+*/
