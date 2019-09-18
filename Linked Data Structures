@@ -1,0 +1,25 @@
+/*
+single dimension arrays
+-accessing elements given index is fast (address can be calculated with formula)
+ -when one is accessed, a block of many is loaded, dramatically reducing cost of accessing those nearby
+
+-once allocated, size cannot change
+-if index is unknown, we have to use either linear (one-by-one) or binary search (unique identifiers)
+
+linked data structures
+-no restrictions on where elements are stored in memory
+-each element is stored in a node
+-each node keeps track of the next one 
+-if we don't know where first node is, we don't know where every other node is 
+  -the head allows us to find the first node 
+
+
+head -> [data|next] -> [data|next] -> [data|/]
+
+At any given time, we only need as many nodes as we have elements in the list; there is no need to reserve "extra space." 
+We can add new nodes to the list by allocating them in memory and then "linking" them into the list; 
+for example, if we allocate a new node and then store the location of the first node as the new node's "next," 
+we've inserted a new node into the list before all of the others. Similarly, we can insert nodes in other positions in the list, 
+or remove nodes from any position in the list, without affecting the location of any of the other nodes; 
+changing "links" is sufficient to reconfigure the list's "shape" on the fly.
+*/
