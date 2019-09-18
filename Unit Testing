@@ -1,0 +1,48 @@
+/*
+individual, separate tests, each focusing on one behavior 
+
+able to run all the tests and see which failed, and to make it easy for them to be found
+
+tend to set up a scenario, run a test, and compare the result to expected. hopefully with no boilerplate code
+
+need to report their results; ideally, they'll display which tests (if any) failed, along with the expected and actual results of each.
+
+Google Test
+
+TEST(TestCaseName, testName) {
+    // code for the test 
+  }
+
+behaviors are sequences of calls to functions for which there are known results
+TEST BEHAVIORS, NOT functions
+
+test fixtures can be used if startup for multiple tests tend to be the same
+
+assertion - something that must be true at the point where it's written; ootherwise the test is aborted and is considered to have failed, and the report will show why.
+
+expectation - something that must be true at the point where it's written, similar to an assertion; otherwise, the test is considered to have failed, but the test continues executing anyway, so you can see if other expectations also fail in the same test, and the report will show all expectations that failed and why.
+
+use Google Test or custom functions beginning with 
+ASSERT_ 
+EXPECT_ 
+
+ASSERT_EQ(0, a.size());
+
+TEST(SongTests, containTheArtistGivenWhenConstructed)
+{
+    Song song{"Paul Simon", "So Beautiful or So What"};
+    ASSERT_EQ("Paul Simon", song.getArtist());
+}
+
+TEST(SongTests, containTheTitleGivenWhenConstructed)
+{
+    Song song{"Arcade Fire", "Afterlife"};
+    ASSERT_EQ("Afterlife", song.getTitle());
+}
+
+https://github.com/google/googletest/blob/master/googletest/docs/primer.md
+https://github.com/google/googletest/blob/master/googletest/docs/advanced.md
+https://github.com/google/googletest/tree/master/googletest/docs
+
+
+*/
