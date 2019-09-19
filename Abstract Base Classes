@@ -1,0 +1,52 @@
+/*
+One way to relate C++ classes that share the same interface (i.e., that have one or more member functions with identical signatures and identical meanings) is to make that relationship explicit using inheritance. We do that by introducing a base class that's general — not specific to any particular kind of shape — and then derive our Circle and Rectangle classes from it. A good name for that class might be Shape.
+
+class Shape {
+  public:
+    virtual double area() const = 0;
+};
+
+class Circle : public Shape {
+  public:
+    virtual double area() const override;
+};
+
+class Rectangle : public Shape {
+  public:
+    virtual double area() const override;
+};
+
+no reasonable implementation for Shape's area() member function
+
+What does it mean to ask a shape for its area? It depends on what kind of shape it is. The Shape class represents the abstract notion of a shape without being any particular kind of shape. And if we don't know what kind of shape we have, we don't know how to calculate its area.
+
+C++ offers a way to establish the important fact about our design — namely, that all shapes can calculate an area the same way — while leaving the implementation details to be filled in by derived classes. 
+
+class Shape {
+  public:
+    virtual double area() const = 0; //pure virtual function; "= 0" meaning pure
+};
+
+Shape::area() is a placeholder for functions defined in derived classes
+Shape is now an abstract base class since it has a pure virtual function--be wary of the danger of calling a "missing" member function
+
+
+class Shape {
+  public:
+    virtual double area() const = 0; //pure virtual function; "= 0" meaning pure
+
+    void printArea(const Shape& s) {
+      std::cout << s.area() << std::endl; //s meaning any object inheriting from Shape
+    }
+    
+    //vector of shape pointers, each pointing to any object inheriting from Shape
+    double calculateSumOfAreas(const std::vector<Shape*>& shapes) { 
+      double total = 0.0;
+      for (const Shape* s : shapes) {
+        total += s->area();
+        }
+        return total;
+    }
+
+};
+*/
