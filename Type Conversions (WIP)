@@ -1,0 +1,55 @@
+/*
+many built-in types can be implicity converted to other built-in types
+(not necessary for you to ask)
+
+int numi = 66; // prints 66
+long numl = numi; // prints 66
+short nums = numi; // prints 66
+char numc = numi; // prints B
+bool numb = numi; // prints 1
+
+double numd = 3.5; // prints 3.5
+int numi = numd;  // prints 3--numd -> numi will result in information loss
+float numf = numd; // prints 3.5
+
+int i = 3;
+int* p1 = i;   // not legal
+char* p2 = i;  // also not legal
+*/
+
+/*
+explicit conversions
+
+C-style cast 
+syntax can be diffficult to parse
+can help convert between numeric types, downcast, or convert betwen values of unrelated types 
+
+#include <iostream>
+
+int main() {
+  int i = 3;
+  int* p = (int*) i; //Please take this integer and give me a pointer that points to the address represented by that number.
+  //There's no good way for you to know, in general, what will be stored in that address, or even what type of value is stored there
+  std::cout << i << std::endl;   // prints 3
+  std::cout << p << std::endl;   // prints 0x3
+
+  int i = 3;
+  int j = 4;
+  double k = i / (double) j;
+  std::cout << k << std::endl;   // prints 0.75
+
+  //cast pointers from one type to another
+  Shape* ps = new Circle{3.0};
+  Circle* pc = (Circle*) ps;
+
+  return 0;
+}
+
+dynamic_cast
+
+static_cast
+
+re-interpret_cast
+
+const_cast
+*/
