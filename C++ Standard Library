@@ -1,4 +1,6 @@
 /*
+Check out this site: https://en.cppreference.com/w/
+
 containers
 
 std::vector, an array-based sequence, in the same spirit as the ArrayList class we wrote in a previous example
