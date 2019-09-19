@@ -16,21 +16,127 @@ A vector must have been created with a particular number of cells.
 A vector use array cells, so each element has an index.
 Accessing an element is O(1)
 Inserting elements at beginning of the sequence, removing elements from the middle of the sequence, and so on, are O(N)
+if the vector is const, you won't be able to assign into its cells, since that would constitute a change to the vector's publicly observable state
 
+compiler can deduce types but not very accurately in C++17
 
-*/
 #include <vector>
 #include <iostream>
 
 int main() {
-  std::vector<int> v;
+
+  std::vector<int> v; //declaration
 
   for (int i = 0; i < 10; i++) {
-    v.push_back(i);
-  }
- 
+    v.push_back(i); //adding an value to a vector
+    }
 
-  printf(v);
+  std::vector<int> w{0,1,2,3,4,5}; //initializer list syntax
+  std::vector<int> x(10, 100); //creates a vector with 10 elements--each with a value of 100
+
+  for (unsigned int i = 0; i < 10; i++) {
+    x.at(i) += 10; //at() just like [] but with bound checking (returns reference)
+    
+    std::cout << x.at(i) << std::endl;
+    }
+
+
+
+  return 0;
+
+}
+*/
+
+/*
+there are generic algorithms
+they generally work--sensibly--on all containers in the standard library
+
+iterators are abstractions for a position in a container, providing access to the value stored at that position 
+
+behave like pointers
+
+* dereference a iterator
+-> if values have members
+++ moves iterator forward
+-- moves iterator backward
+
+forward iterators - iterates forward one at a time (*, ++)
+bidirectional - can iterate backwards (*, ++, --)
+random access - can make arbitrary jumps using pointer-arithmetic-like ssyntax
+
+const_iterator is one that can be used to read values from a container but not change them
+
+std::vector<std::string>::const_iterator.
+
+Start an iterator where begin() points.
+Obtain each value the iterator points to.
+Advance the iterator forward once per loop iteration until it points where end() points.
+
+std::vector<int> v{1, 2, 3, 4, 5};
+
+for (int i : v)
+{
+    std::cout << i << std::endl;
+}
+
+is actually...
+
+std::vector<int> v{1, 2, 3, 4, 5};
+
+for (std::vector<int>::iterator v_iterator = v.begin(); v_iterator != v.end(); v_iterator++)
+{
+    int i = *v_iterator;
+    std::cout << i << std::endl;
+}
+
+//why we should use auto
+#include <vector>
+#include <string>
+#include <iostream>
+
+int main() {
+  std::vector<std::string> s;
+  
+  for (std::vector<std::string>::iterator i = s.begin(); i != s.end(); i++) {
+    std::cout << *i << std::endl;
+    std::cout << i->length() << std::endl;
+  }
+
+  for (auto i = s.begin(); i != s.end(); i++) { //auto automatically infers type for us
+    std::cout << i-> length() << std::endl; 
+  }
 
   return 0;
 }
+*/
+
+/*
+std::for_each, which calls a function of your choice on every value in a range.
+
+std::count_if, which counts how many values in a range meet some criteria--using a function passed as a parameter
+
+std::transform --  can write its output somewhere other than directly on top of its input (i.e transform one vector, storing the results in another vector)
+
+std::sort - sorts values into ascending order. You can optionally pass a comparison function that determines whether a value is less than another
+
+generic algorithms that accept functions as arguments actually accept function objects
+
+
+#include <algorithm>   // This is where the generic algorithms are declared
+#include <string>
+#include <vector>
+
+void printStringLine(const std::string& s)
+{
+    std::cout << s << std::endl;
+}
+
+// ...
+
+std::vector<std::string> v;
+// ...
+//begin iterator (first input value), end iterator (value just after last input value)
+std::for_each(v.begin(), v.end(), printStringLine);
+
+*/
+
