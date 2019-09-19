@@ -1,0 +1,103 @@
+/*
+OOP
+
+Classes - describe new kinds of objects that encapsulate data and operations manipulating said data
+Inheritance - describe new class that extend or update existing ones
+Polymorphism - asking an object to do differnt things depending on its current class
+
+
+Inheritance
+class X {....};
+
+class Y : public X {......};
+
+class Y inherits from X
+public - code elsewhere in the program know about this relationship
+
+Y automatically inherits X's member functions and variables
+Y can have new members
+Y can re-declare or override inherited members
+
+
+Polymorphism
+
+X x;
+Y y; 
+
+X* px = new X;
+Y* py = new Y;
+
+X& rx = x;
+Y& ry = y;
+
+//under the assumption that class Y inherited from X...
+Y y2 = x; //fails, X object is not a Y object 
+X x2 = y; //works, Y object is stripped down to an X object
+
+X xx;
+Y yy;
+X& rxx = yy;
+Y& ryy = xx; //fails, this ends up referencing an X object when it should reference a Y
+X* px = new X;
+Y* py = new Y;
+X* px2 = py; 
+Y* py2 = px; //fails since this points to a X object, not an Y
+
+
+//Y has a version that overrides the version from X
+
+class X
+{
+public:
+    void foo();
+};
+
+
+class Y : public X
+{
+public:
+    void foo();
+};
+
+rxx.foo(); 
+px2->foo();
+
+since polymorphism has a run-time cost, you have to put virtual at the beginning of each funciton declaration to opt-in
+
+if not virtual--they would've called X's version
+otherwise--they called y's version
+
+class X
+{
+public:
+    virtual void foo();
+};
+
+class Y : public X
+{
+public:
+    virtual void foo();
+};
+
+by adding an override specifier at the end of a function signature... you indicate that there is such a relationship and ensure such 
+
+
+class Y : public X
+{
+public:
+    virtual void foo() override;
+};
+
+with override specifier, an error will occur if:
+
+You mark a member function with override in a class whose base class doesn't have a member function with that name.
+
+You mark a member function with override in a class whose base class does have a member function with that name, but whose signature doesn't match.
+
+You mark a member function with override, but that member function was never declared virtual.
+
+
+
+
+
+*/
