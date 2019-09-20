@@ -44,12 +44,98 @@ int main() {
 
   return 0;
 }
+*/
 
+/*
 dynamic_cast
 
-static_cast
+casts a pointer or reference of one type to a pointer or reference of a related type
+specifically downcasting--casting a pointer or reference of a base class to that of a child class
 
-re-interpret_cast
+cast is checked at run-time
 
+only work when the types involved have at least one virtual member function
+
+
+void foo(Shape* s) {
+  Circle* c = dynamic_cast<Circle*>(s);
+  // ...
+}
+*/
+
+/*
+static_cast 
+
+entirely resolved at compile-time
+-beware; compiler won't know what the run-time type of an object is, given only a pointer
+-does give more performance
+-can invoke conversions between non-pointer types
+
+void foo(Shape* s) {
+  Circle* c = static_cast<Circle*>(s);
+  //...
+}
+
+double d = 3.5;
+int i = static_cast<int>(d);
+*/
+
+/*
+reinterpret_cast
+
+converts just about anything into anything else
+-betwen pointers of unrelated types
+-between integers and pointers
+-cast pointers to void* and back
+ (void* is an untyped pointer)
+ (done in extremely low-level code)
+
+if used a lot in higher-level programs, evaluate design choices
+*/
+
+/*
 const_cast
+just removes const from a type
+if you want to remove both a const and change a type,
+you must const_cast and then cast again
+
+void blah(const Blah& b) {
+  Blah& bb = const_cast<Blah&>(b);
+  bb.someMemberFunctionThatIsNotConst();
+}
+
+*/
+
+
+/*
+If you have a constructor in a class that can be called with exactly one argument — either because it's declared to take exactly one, or because it has default arguments that allow it to be called with only one — then it is automatically a converting constructor,
+
+converting constructor - automatically implicitly converts type of argument to tupe of constructor 
+
+class Transaction
+{
+public:
+    Transaction(int id): id{id} { }
+    int getId() const { return id; }
+
+private:
+    int id;
+};
+
+void val(Transaction t) { ... }
+void ref(Transaction& t) { ... }
+
+Transaction t1{14};
+Transaction t2 = 17; //legal, but weird...
+int i3 = 555; Transaction t3 = i3;
+val(72);
+ref(89); //illegal, Transition reference can't refer to ints 
+
+to turn this functionality off...
+
+mark the constructor with explicit
+-it only makes sense if the constructor takes a single argument 
+-think about whether you want implicit conversion 
+
+Transaction t1{14}; //only legal constructor 
 */
