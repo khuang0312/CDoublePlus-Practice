@@ -1,4 +1,8 @@
 /*
+after the #include
+<code that is not yours>
+"code that is yours"
+
 .cpp - source files
 static type checking - upon compilation, all types are checked
 
