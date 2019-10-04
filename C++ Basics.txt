@@ -164,8 +164,8 @@ int square(int n)
 assignment
 
 originally...
-lvalue - expressions legal on the left-hand side
-rvalue - expressions only legal on the right-hand side
+lvalue - expressions legal on the left-hand side (values that describe a location in memory)
+rvalue - expressions only legal on the right-hand side (values that do not)
 
 lvalues - values living beyond the expression originally evaluated in
   (represents a location in memory, not just variable name)
